@@ -1,12 +1,13 @@
 <?php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'vehicle_service_db');
-define('RAZORPAY_KEY_ID', 'rzp_test_fDmVzWIk43LrqG');
-define('RAZORPAY_KEY_SECRET', '2vqsxsdMHHdMpVrmvQoP5x5h');
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('DB_PASS') !== false ? getenv('DB_PASS') : '');
+define('DB_NAME', getenv('DB_NAME') ?: 'vehicle_service_db');
+define('DB_PORT', getenv('DB_PORT') ? (int)getenv('DB_PORT') : 3306);
+define('RAZORPAY_KEY_ID', getenv('RAZORPAY_KEY_ID') ?: 'rzp_test_fDmVzWIk43LrqG');
+define('RAZORPAY_KEY_SECRET', getenv('RAZORPAY_KEY_SECRET') ?: '2vqsxsdMHHdMpVrmvQoP5x5h');
 define('SITE_NAME', 'AutoCare Service Center');
-define('SITE_URL', 'http://localhost/vehicle_service');
+define('SITE_URL', getenv('SITE_URL') ?: 'http://localhost/vehicle_service');
 define('UPLOAD_PATH', __DIR__ . '/../uploads/');
 
 // ── Gmail SMTP config ──────────────────────────────────────────
@@ -15,7 +16,7 @@ define('MAIL_FROM_EMAIL', 'zarinasab03@gmail.com');   // ← your Gmail
 define('MAIL_PASSWORD',   'coqdqiebpuytedif');       // ← Gmail App Password (not your login password)
 // ──────────────────────────────────────────────────────────────
 
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
 $conn->set_charset("utf8mb4");
 
