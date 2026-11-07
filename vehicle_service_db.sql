@@ -168,6 +168,7 @@ CREATE TABLE `service_requests` (
   `vehicle_brand` varchar(50) DEFAULT NULL,
   `vehicle_model` varchar(50) DEFAULT NULL,
   `problem_description` text NOT NULL,
+  `service_address` text DEFAULT NULL,
   `status` enum('Pending','Approved','Repairing','Repairing Done','Released') DEFAULT 'Pending',
   `mechanic_id` int(11) DEFAULT NULL,
   `service_cost` decimal(10,2) DEFAULT 0.00,

@@ -45,6 +45,9 @@ if [ -z "$DB_HOST" ] || [ "$DB_HOST" = "localhost" ] || [ "$DB_HOST" = "127.0.0.
     else
         echo "Database already has $TABLE_COUNT tables."
     fi
+
+    # Ensure service_address column exists in service_requests table
+    mysql -u root vehicle_service_db -e "ALTER TABLE service_requests ADD COLUMN IF NOT EXISTS service_address TEXT NULL AFTER problem_description;" 2>/dev/null || true
 fi
 
 # Ensure uploads directory is writable
